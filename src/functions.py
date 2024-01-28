@@ -7,10 +7,8 @@ def date_operation():
     """
     Даты операции
     """
-
     list_date = []
     operations = sorted_date()
-
     for op in operations:
         operation_date = datetime.fromisoformat(op['date'])
         list_date.append(operation_date.strftime('%d.%m.%Y'))
@@ -35,15 +33,21 @@ def operation_sender():
     Разделяет и частично показывает номер отправителя,
     если его нет, то передаёт пустую строку
     """
-
     senders = []
     operations = sorted_date()
     for operation in operations:
         if 'from' in operation:
-            numbers = operation['from'][-16:-1]
-            blocks = f'{numbers[0:4]} {numbers[4:6]}** **** {numbers[12:]}'
-            result = operation['from'].replace(operation['from'][-16:-1], blocks)
-            senders.append(result)
+            if operation['from'].lower().startswith("счет"):
+                numbers = operation['from'][-16:-1]
+                blocks = f'**{numbers[-4:-1]}'
+                result = operation['from'].replace(operation['from'][-20:-1], blocks)
+                senders.append(result)
+
+            elif operation['from']:
+                numbers = operation['from'][-16:-1]
+                blocks = f'{numbers[0:4]} {numbers[4:6]}** **** {numbers[12:]}'
+                result = operation['from'].replace(operation['from'][-16:-1], blocks)
+                senders.append(result)
 
         else:
             senders.append('')

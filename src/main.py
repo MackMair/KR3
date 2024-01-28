@@ -1,14 +1,6 @@
 from src.functions import date_operation, display_description, operation_sender, operation_recipient, \
     operation_total_amount, operation_currency
 
-# Переданы результаты всех функций оформления
-list_date_ = date_operation()
-list_description_ = display_description()
-list_from_ = operation_sender()
-list_to_ = operation_recipient()
-list_sum_ = operation_total_amount()
-list_currency_ = operation_currency()
-
 
 def final_lists(list_date, list_description, list_from, list_to, list_sum, list_currency):
     """
@@ -30,9 +22,22 @@ def final_lists(list_date, list_description, list_from, list_to, list_sum, list_
     return operations
 
 
+# Переданы результаты всех функций оформления
+list_date_ = date_operation()
+list_description_ = display_description()
+list_from_ = operation_sender()
+list_to_ = operation_recipient()
+list_sum_ = operation_total_amount()
+list_currency_ = operation_currency()
+
+
 # Переменная содержащая результат функции склеивания
 final_list = (final_lists(list_date_, list_description_, list_from_, list_to_, list_sum_, list_currency_))
+
 
 # Финальный перебор операций и их последовательный вывод
 for final_operation in final_list:
     print(final_operation)
+
+
+
